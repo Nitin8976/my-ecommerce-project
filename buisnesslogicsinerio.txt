@@ -1,0 +1,92 @@
+business logic
+
+admin:-
+(/api/admin)
+--get all products
+--get all customers
+--get all vendors
+--get all sellers
+
+all thing also get by id()
+
+--get top 10 sellers
+---get top 11 customers
+---get top  10 selling products
+
+
+
+
+customers login:-
+customer without login show only products
+ 
+customer:- login  show session storage cart product list added by customer
+(/api/customerlogin)
+for login user:-----let cmd=`SELECT * from users WHERE email='${username}' and password='${password}' `
+
+-------------all product list
+select * from  product
+-------------on add cart product get into session
+req.session.cart=[]
+--------------delete item from cart
+  req.session.cart=req.session.cart.filter((data)=>(data.productid !=req.params.id))
+    res.send(req.session.cart);
+    res.end();
+-------------payment initate after order placed routes got payments table
+
+
+
+
+
+after order get placed
+orders table get
+--------customer id
+--------product id
+
+
+
+ vendor:-
+ (/api/vendorlogin)
+for login user:-----let cmd=`SELECT * from users WHERE email='${username}' and password='${password}' `
+--------order detail----get address of delivery of user by orderid from orders table
+--------product price ---for delivery order  
+-----confrmation after complition order
+
+
+
+seller:-
+after login:-
+(/api/sellerlogin)
+for login user:-----let cmd=`SELECT * from users WHERE email='${username}' and password='${password}' `
+---------------total product added by seller in product table
+--------------product sell by seller
+-------------top selling product by seller
+------------product left added by any seller
+
+
+
+
+
+
+
+
+`SELECT * FROM product WHERE product_id IN (SELECT product_id_fk2 FROM cart_item WHERE user_id_fk1= ${id})`
+
+
+
+
+
+orderdeatil:-
+get order by orderdetailid
+get customer deatil by orderdeatil table  where customerid set foregin key from customer table
+get produc deatil by orderdeatil table  where productid set foregin key from product table
+
+
+orders:-
+get ordedeatil by orderdetailid from orders table set  as forignkey in orders table
+
+
+
+
+
+payments:-
+     payment get genrated by using odrerid from orders table set as foreginkey in payments table 
