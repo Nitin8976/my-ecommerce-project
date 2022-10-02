@@ -20,4 +20,3 @@ show tables;
 	insert into shippingvendors(userid_fk1,govtidnumber)values(3,45043);
     insert into customers(billingaddress,deliveryaddress,userid_fk)values("YNR","ynr302","1");
     
-    

@@ -120,3 +120,13 @@ CREATE TABLE `ecom`.`payments` (
 
 
 
+ALTER TABLE `ecom`.`orders` 
+ADD COLUMN `shippingvendorsid` INT NULL AFTER `customersid`,
+ADD INDEX `shippingvendorsid_idx` (`shippingvendorsid` ASC) VISIBLE;
+;
+ALTER TABLE `ecom`.`orders` 
+ADD CONSTRAINT `shippingvendorsid`
+  FOREIGN KEY (`shippingvendorsid`)
+  REFERENCES `ecom`.`shippingvendors` (`shippingvendorsid`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

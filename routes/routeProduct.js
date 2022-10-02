@@ -12,3 +12,6 @@ module.exports=function(app){
     // // .put(userController.update)
     .get(productController.getById)
 }
+
+
+

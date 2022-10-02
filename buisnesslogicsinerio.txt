@@ -13,9 +13,6 @@ all thing also get by id()
 ---get top 11 customers
 ---get top  10 selling products
 
-
-
-
 customers login:-
 customer without login show only products
  
@@ -90,3 +87,5 @@ get ordedeatil by orderdetailid from orders table set  as forignkey in orders ta
 
 payments:-
      payment get genrated by using odrerid from orders table set as foreginkey in payments table 
+
+     payment made on date

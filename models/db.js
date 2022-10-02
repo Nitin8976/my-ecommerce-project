@@ -3,7 +3,7 @@ const conUri={
     host:"localhost",
     user:"root",
     password:"mysql123",
-    database:"ecommerce"
+    database:"ecom"
 }
 
 const connection=mysql.createConnection(conUri);

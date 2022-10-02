@@ -3,6 +3,7 @@ const routeseller=require('./routes/routeSeller')
 const routeuser=require('./routes/routeUser')
  const routeProduct=require('./routes/routeProduct')
  const routelogin=require('./routes/routeCartitem')
+ const routeadmindashboard=require('./routes/routeadmindashboard')
  var session = require('express-session')
 const app=express();
 
@@ -19,7 +20,7 @@ routeseller(app);
 routeProduct(app);
 routeuser(app);
 routelogin(app);
-
+routeadmindashboard(app)
 
 app.listen(7000,()=>{
 
