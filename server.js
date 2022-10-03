@@ -1,9 +1,10 @@
 const express= require('express');
 const routeseller=require('./routes/routeSeller')
-const routeuser=require('./routes/routeUser')
+const routecustomer=require('./routes/routecustomer')
  const routeProduct=require('./routes/routeProduct')
- const routelogin=require('./routes/routeCartitem')
+//  const routelogin=require('./routes/routeLogin')
  const routeadmindashboard=require('./routes/routeadmindashboard')
+ const oneDay = 1000 * 60 * 60 * 24;
  var session = require('express-session')
 const app=express();
 
@@ -13,13 +14,13 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { maxAge: oneDay }
   }))
 
 routeseller(app);
 routeProduct(app);
-routeuser(app);
-routelogin(app);
+routecustomer(app);
+// routelogin(app);
 routeadmindashboard(app)
 
 app.listen(7000,()=>{

@@ -10,8 +10,6 @@ exports.getAll=async function(req,res){
     let result=[];
     result=await sellerdal.getAllSeller();
     res.send(result);
-req.session.seller_id=seller_id
-req.session.username=username;
 
 
 }

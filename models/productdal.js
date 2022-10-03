@@ -3,9 +3,10 @@ const sql=require('./db')
 
 
 
-exports.getAllProduct=function(){
+exports.getAllProduct=function(req,res){
     return new Promise(resolve=>{
-    let command="SELECT * FROM product";
+        console.log(req.session.sellerID)
+    let command="SELECT * FROM products";
     console.log(command);
     sql.query(command,(err, rows, fields)=>{
         resolve(rows);
@@ -15,8 +16,8 @@ exports.getAllProduct=function(){
     
 exports.insertProduct=(req, res) =>{
     return new Promise(resolve=>{
-    
-    var cmd = `INSERT INTO seller(product_name,product_desc,product_price,product_stock,product_mnf,seller_id) values('${req.body.product_name}','${req.body.product_desc}',${req.body.product_price},'${req.body.product_stock}','${req.body.product_mnf}',${req.body.seller_id})`
+    console.log(req.session.sellerID)
+    var cmd = `insert into products(title,description,quantity,unitprice,category,sellerid) values('${req.title}', '${req.description}','${req.quantity}' ,'${req.unitprice}','${req.category}',${req.session.sellerID})`;
    
    
    console.log(cmd);
