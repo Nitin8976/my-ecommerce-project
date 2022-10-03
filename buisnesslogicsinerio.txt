@@ -89,3 +89,11 @@ payments:-
      payment get genrated by using odrerid from orders table set as foreginkey in payments table 
 
      payment made on date
+
+
+
+
+
+
+
+select$
