@@ -2,12 +2,18 @@ const express= require('express');
 const routeseller=require('./routes/routeSeller')
 const routecustomer=require('./routes/routecustomer')
  const routeProduct=require('./routes/routeProduct')
-//  const routelogin=require('./routes/routeLogin')
+const routeorders=require('./routes/routeorders')
  const routeadmindashboard=require('./routes/routeadmindashboard')
+ const cors=require('cors');
  const oneDay = 1000 * 60 * 60 * 24;
- var session = require('express-session')
-const app=express();
+ const session = require('express-session')
 
+
+
+
+const app=express();
+//middleewares
+app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
@@ -20,10 +26,10 @@ app.use(session({
 routeseller(app);
 routeProduct(app);
 routecustomer(app);
-// routelogin(app);
+routeorders(app)
 routeadmindashboard(app)
 
-app.listen(7000,()=>{
+app.listen(3000,()=>{
 
-    console.log("  listening  7000")
+    console.log("  listening  3000")
 });

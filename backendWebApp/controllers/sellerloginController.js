@@ -16,7 +16,7 @@ req.session.sellerID=sellerID;
 console.log(req.session.sellerID);
 
 
-    res.redirect('/api/products');
+    res.redirect('http://localhost:7000/list.html');
     }
     // if(result.role==='seller'){
     //     res.redirect('/api/products');  

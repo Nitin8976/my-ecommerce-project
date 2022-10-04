@@ -1,14 +1,14 @@
 var loginController=require('../controllers/dasboards/customerdashboard')
-var userController= require('../controllers/userController')
+var customerController= require('../controllers/customercontroller')
 
-var productController=require('../controllers/productController');
+//var productController=require('../controllers/productController');
 //HTTP request mapping 
 
 
 
 module.exports=function(app){
-    app.route('/api/products')
-    .get(productController.getAll)
+    app.route('/api/customers')
+    .get(customerController.getAll)
     app.route('/api/customer/login')
     .post(loginController.login)
     app.route('/api/logout')
