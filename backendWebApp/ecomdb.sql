@@ -102,17 +102,22 @@ CREATE TABLE `ecom`.`orderdetail` (
 
 -- payment detail
 CREATE TABLE `ecom`.`payments` (
-  `paymentid` INT NOT NULL AUTO_INCREMENT,
-  `paymentdate` VARCHAR(45) NULL,
-  `paymentmode` VARCHAR(45) NULL,
-  `amount` BIGINT NULL,
-  `transactionid` VARCHAR(45) NULL,
-  `orderid_fk` INT NULL,
-  PRIMARY KEY (`paymentid`),
-  INDEX `orderid_fk_idx` (`orderid_fk` ASC) VISIBLE,
-  CONSTRAINT `orderid_fk`
-    FOREIGN KEY (`orderid_fk`)
+  `paymentsid` INT NOT NULL AUTO_INCREMENT,
+  `amount` INT NULL,
+  `paymentmode` INT NULL,
+  `orderid_fk0` INT NULL,
+  `transactionid` INT NULL,
+  PRIMARY KEY (`paymentsid`),
+  INDEX `orderid_idx` (`orderid_fk0` ASC) VISIBLE,
+  INDEX `transactionid_idx` (`transactionid` ASC) VISIBLE,
+  CONSTRAINT `orderid_fk0`
+    FOREIGN KEY (`orderid_fk0`)
     REFERENCES `ecom`.`orders` (`orderid`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `transactionid`
+    FOREIGN KEY (`transactionid`)
+    REFERENCES `ecom`.`transactions` (`transactionid`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE);
 
@@ -130,3 +135,60 @@ ADD CONSTRAINT `shippingvendorsid`
   REFERENCES `ecom`.`shippingvendors` (`shippingvendorsid`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+-
+
+
+--accounts table creation
+CREATE TABLE `ecom`.`accounts` (
+  `accountid` INT NOT NULL AUTO_INCREMENT,
+  `userid_fk4` INT NULL,
+  `balance` INT NULL,
+  `oredrer date` DATE NULL,
+  PRIMARY KEY (`accountid`),
+  INDEX `userid_fk4_idx` (`userid_fk4` ASC) VISIBLE,
+  CONSTRAINT `userid_fk4`
+    FOREIGN KEY (`userid_fk4`)
+    REFERENCES `ecom`.`users` (`userid`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
+
+
+--transaction table creation
+CREATE TABLE `ecom`.`transactions` (
+  `transactionid` INT NOT NULL AUTO_INCREMENT,
+  `fromaccid` INT NULL,
+  `toaccid` INT NULL,
+  `date` DATE NULL,
+  PRIMARY KEY (`transactionid`),
+  INDEX `fromaccid_idx` (`fromaccid` ASC) VISIBLE,
+  INDEX `toaccid_idx` (`toaccid` ASC) VISIBLE,
+  CONSTRAINT `fromaccid`
+    FOREIGN KEY (`fromaccid`)
+    REFERENCES `ecom`.`accounts` (`accountid`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `toaccid`
+    FOREIGN KEY (`toaccid`)
+    REFERENCES `ecom`.`accounts` (`accountid`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
+
+--deliveries table
+CREATE TABLE `ecom`.`deliveries` (
+  `deliverieid` INT NOT NULL AUTO_INCREMENT,
+  `orderid_fk5` INT NULL,
+  `vendorid` INT NULL,
+  PRIMARY KEY (`deliverieid`),
+  INDEX `orderid_fk4_idx` (`orderid_fk5` ASC) VISIBLE,
+  INDEX `vendorid_idx` (`vendorid` ASC) VISIBLE,
+  CONSTRAINT `orderid_fk4`
+    FOREIGN KEY (`orderid_fk5`)
+    REFERENCES `ecom`.`orders` (`orderid`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `vendorid`
+    FOREIGN KEY (`vendorid`)
+    REFERENCES `ecom`.`shippingvendors` (`shippingvendorsid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
