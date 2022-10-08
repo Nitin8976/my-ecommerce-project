@@ -1,16 +1,15 @@
-const express= require('express');
-const routeseller=require('./routes/routeSeller')
-const routecustomer=require('./routes/routecustomer')
- const routeProduct=require('./routes/routeProduct')
-const routeorders=require('./routes/routeorders')
- const routeadmindashboard=require('./routes/routeadmindashboard')
- const cors=require('cors');
- const oneDay = 1000 * 60 * 60 * 24;
- const session = require('express-session')
+import express  from 'express';
+// import routeseller from './routes/routeSeller.js'
+import routecustomerloginauth from './routes/routecustomerloginauth.js';
+//  import routeProduct from'./routes/routeProduct.js'
+// import routeorders from'./routes/routeorders.js'
+//  import routeadmindashboard from'./routes/routeadmindashboard.js'
+ import cors from 'cors' ;
+ import session   from 'express-session' 
 
 
 
-
+ const oneDay =  1000 * 60 * 60 * 24;
 const app=express();
 //middleewares
 app.use(cors());
@@ -23,11 +22,11 @@ app.use(session({
     cookie: { maxAge: oneDay }
   }))
 
-routeseller(app);
-routeProduct(app);
-routecustomer(app);
-routeorders(app)
-routeadmindashboard(app)
+// routeseller(app);
+// routeProduct(app);
+routecustomerloginauth(app);
+// routeorders(app)
+// routeadmindashboard(app)
 
 app.listen(3000,()=>{
 

@@ -43,12 +43,20 @@ exports.getByIdcutomer=function(id){
 });
 }
 
-exports.removeByIdSeller=function(id){
+exports.updateBypassword=function(req,res){
     return new Promise(resolve=>{
-    let command="DELETE FROM seller WHERE user_id=" +id;
+        let email =req.body.email;
+        let password=req.body.password;
+        let newpassword=req.body.confirmpassword;
+    let command=`UPDATE users SET password='${newpassword}' WHERE password ='${password}' AND email='${email}'`;
     console.log(command);
     sql.query(command,(err, rows, fields)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
         resolve(rows);
+        }
     })
 });
 }

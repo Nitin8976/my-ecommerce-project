@@ -5,7 +5,6 @@ const sql=require('./db')
 
 exports.getAllOrders=function(req,res){
     return new Promise(resolve=>{
-        console.log(req.session.sellerID)
     let command="SELECT * FROM orders";
     console.log(command);
     sql.query(command,(err, rows, fields)=>{

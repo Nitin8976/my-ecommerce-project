@@ -1,4 +1,4 @@
-const mysql=require('mysql');
+import mysql from 'mysql';
 const conUri={
     host:"localhost",
     user:"root",
@@ -17,4 +17,4 @@ connection.connect((err)=>{
     }
 })
 
-module.exports=connection;
+export default connection;
