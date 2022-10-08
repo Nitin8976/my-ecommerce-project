@@ -1,6 +1,7 @@
 import express  from 'express';
 // import routeseller from './routes/routeSeller.js'
 import routecustomerloginauth from './routes/routecustomerloginauth.js';
+import routecustomer from './routes/routecustomer.js';
 //  import routeProduct from'./routes/routeProduct.js'
 // import routeorders from'./routes/routeorders.js'
 //  import routeadmindashboard from'./routes/routeadmindashboard.js'
@@ -25,6 +26,7 @@ app.use(session({
 // routeseller(app);
 // routeProduct(app);
 routecustomerloginauth(app);
+routecustomer(app);
 // routeorders(app)
 // routeadmindashboard(app)
 

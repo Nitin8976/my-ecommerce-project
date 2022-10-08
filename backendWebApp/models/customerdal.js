@@ -1,62 +1,94 @@
-const sql=require('./db')
+import sql from './db.js'
 
 
-exports.insertCustomer=(req, res) =>{
-    return new Promise(resolve=>{
+
+export  default class CustomerManager{
+    constructor(){
+        
+    }
     
-    var cmd = `INSERT INTO users(email,password,firstname,lastname,address,phno) values('${req.body.username}','${req.body.password}','${req.body.firstname}','${req.body.lastname}','${req.body.address}',${req.body.phno})`
-   
-   
-   console.log(cmd);
-  sql.query(cmd,(err,rows,fields)=> {
-if(err){
-    console.log(err);
-}
-else{
-        console.log(rows);
-      
-      resolve(rows);
-}
-    })
-      
-})
-}
-
-
-exports.getAllCustomer=function(req,res){
-    return new Promise(resolve=>{
-    let command=    `SELECT * FROM users where role='customer'`;
-    console.log(command);
-    sql.query(command,(err, rows, fields)=>{
-        resolve(rows);
-    })
-});
-}
-
-exports.getByIdcutomer=function(id){
-    return new Promise(resolve=>{
-    let command="SELECT * FROM users WHERE customer=" +id;
-    console.log(command);
-    sql.query(command,(err, rows, fields)=>{
-        resolve(rows);
-    })
-});
-}
-
-exports.updateBypassword=function(req,res){
-    return new Promise(resolve=>{
-        let email =req.body.email;
-        let password=req.body.password;
-        let newpassword=req.body.confirmpassword;
-    let command=`UPDATE users SET password='${newpassword}' WHERE password ='${password}' AND email='${email}'`;
-    console.log(command);
-    sql.query(command,(err, rows, fields)=>{
+    insert=(req,res)=>{
+        return new Promise(resolve=>{
+    
+            var cmd = `call InsertCustomer('${req.body.email}','${req.body.password}','${req.body.firstname}','${req.body.lastname}','${req.body.address}',${req.body.contactnumber},'${req.body.role}','${req.body.location}')`
+           
+           
+           console.log(cmd);
+          sql.query(cmd,(err,rows,fields)=> {
         if(err){
             console.log(err);
         }
         else{
-        resolve(rows);
+                console.log(rows);
+              
+              resolve(rows);
         }
-    })
-});
+            })
+              
+        })
+    }
+
+    update=(req,res)=>{
+        return new Promise(resolve=>{
+            let command=`UPDATE users set email='${req.body.email}' WHERE password='${req.body.password}'`;
+            console.log(command);
+            sql.query(command,(err, rows, fields)=>{
+                resolve(rows);
+            })
+        });
+    }
+
+    getAll(){
+    //     return new Promise(resolve=>{
+    //     fsModule.readFile(fileName,(err,data)=>{
+    //         var Data=data.toString();
+    //         var getAllCustomers = JSON.parse(Data);
+    //         resolve(getAllCustomers);
+           
+    //     })
+
+    // });
+    return new Promise(resolve=>{
+        let command=    `SELECT * FROM users where role='customer'`;
+        console.log(command);
+        sql.query(command,(err, rows, fields)=>{
+            resolve(rows);
+        })
+    });
+    }
+
+    getById=(id)=>{
+       
+        return new Promise(resolve=>{
+  
+        //     fsModule.readFile(fileName,(err,data)=>{
+        //         var Data=data.toString();
+        //         var allUsers=JSON.parse(Data);
+        //         var foundUser={};
+        //   foundUser= allUsers.find((user)=>(user.id == id))
+        //   console.log("by id");
+        //   console.log(foundUser);
+        //         resolve(foundUser);
+               
+        //     })
+            let command=`select * FROM users WHERE userid=${id}`;
+            console.log(command);
+            sql.query(command,(err, rows, fields)=>{
+                resolve(rows);
+            })
+        });
+        
 }
+
+    delete=(id)=>{   
+        return new Promise(resolve=>{
+            let command=`DELETE FROM users WHERE userid=${id}`;
+            console.log(command);
+            sql.query(command,(err, rows, fields)=>{
+                resolve(rows);
+            })
+        });
+    }
+}
+
+

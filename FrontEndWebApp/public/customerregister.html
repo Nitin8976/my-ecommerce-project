@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <title>Register Page</title> 
+        <script src="/scripts/jquery-3.2.1.min.js"></script>
+        <script src="/scripts/app.js"></script>
+    <body>
+        <h1>Transflower Store</h1>
+        <hr/>
+        <a href="index.html">Home</a> | <a href="list.html">Catalog</a>|<a href="login.html">SignIn</a>| <a href="customerregister.html">customerRegister</a>
+        <hr/>
+        <div>
+        
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"/><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" ><br><br>
+                <label for="firstname">firstname:</label><br>
+                <input type="text" id="firstname" name="firstname" ><br><br>
+                <label for="lastname">lastname:</label><br>
+                <input type="text" id="lastname" name="lastname" ><br><br>
+                <label for="address">address:</label><br>
+                <input type="text" id="address" name="address" ><br><br>
+                <label for="contactnumber">contactnumber:</label><br>
+                <input type="tel" id="contactnumber" name="contactnumber" ><br><br>
+                <select name="role" id="role">
+                    <option selected="selected" >shippingvendor</option>
+                    <option selected="selected" >seller</option>
+                    <option selected="selected">customer</option>
+                  </select><br><br>
+                <label for="location">location:</label><br>
+                <input type="text" id="location" name="location" ><br><br>
+                  <button onclick="onsubmitcustomer()">submit</button>
+        </div>
+    </body>
+</html>
