@@ -1,16 +1,18 @@
-
-var productController=require('../controllers/productController');
+import ProductManager from "../models/productdal.js"
+import ProductController from "../controllers/productController.js";
 
 //HTTP request mapping 
 
-module.exports=function(app){
-    app.route('/api/product')
-    .get(productController.getAll)
-    .post(productController.insert)
-    app.route('/api/product/:id')
+export default function(app){
+    let productmgr=new ProductManager();// repo
+    let productcontroller=new ProductController(productmgr); 
+    app.route('/api/products')
+    .get(productcontroller.getAll)
+    // .post(productcontroller.insert)
+   
     // // .delete(userController.remove)
     // // .put(userController.update)
-    .get(productController.getById)
+    // .get(productController.getById)
 }
 
 

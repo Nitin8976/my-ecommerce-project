@@ -2,10 +2,11 @@ import express  from 'express';
 // import routeseller from './routes/routeSeller.js'
 import routecustomerloginauth from './routes/routecustomerloginauth.js';
 import routecustomer from './routes/routecustomer.js';
-//  import routeProduct from'./routes/routeProduct.js'
+ import routeProduct from'./routes/routeProduct.js'
 // import routeorders from'./routes/routeorders.js'
 //  import routeadmindashboard from'./routes/routeadmindashboard.js'
- import cors from 'cors' ;
+//  import routeCartitem from './routes/routeCartitem.js'
+import cors from 'cors' ;
  import session   from 'express-session' 
 
 
@@ -24,9 +25,10 @@ app.use(session({
   }))
 
 // routeseller(app);
-// routeProduct(app);
+routeProduct(app);
 routecustomerloginauth(app);
 routecustomer(app);
+//  routeCartitem(app);
 // routeorders(app)
 // routeadmindashboard(app)
 

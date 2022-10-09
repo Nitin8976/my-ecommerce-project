@@ -1,10 +1,10 @@
 
-// var cartitemController= require('../controllers/cartitemController')
-// //HTTP request mapping 
+import cartitemController from "../controllers/cartitemController"
+//HTTP request mapping 
 
 
-
-// module.exports=function(app){
-//     app.route('/api/cartitem/:id')
-//     .get(cartitemController.cartitem)
-// // }
+export default function(app){
+    let cartcontroller=new cartitemController();
+    app.route('/api/postcartitem')
+    .get(cartcontroller.postcartitem)
+}

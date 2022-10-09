@@ -10,12 +10,14 @@ constructor(cauthmgr){
 
 login= async (req,res)=>{
     console.log(req.body)
+    
     let result=[];
     result=await this.customerLoginManager.loginUser(req);
     console.log(result);
+    
       req.session.isCustomer=result.map(result=>result.role)
       req.session.isCustomerEmail=result.map(result=>result.email)
-     if((req.session.isCustomer && req.session.isCustomerEmail)){
+     if((req.session.isCustomer== 'customer')){
          console.log(req.session.isCustomerEmail);
          
 let jwtSecretKey="kuch_secret";
