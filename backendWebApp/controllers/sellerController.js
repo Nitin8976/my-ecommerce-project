@@ -1,30 +1,40 @@
-const sellerdal=require('../models/sellerdal')
 
-exports.insert=async function(req,res){
-    let result=[];
-    result=await sellerdal.insertSeller(req);
-    res.send(result);
+// import repoManager from "./dal.js";
 
-}
-exports.getAll=async function(req,res){
-    let result=[];
-    result=await sellerdal.getAllSeller();
-    res.send(result);
+export default class SellerController{
+    //constructor Dependency Injection
+    constructor(smgr){
+        this.sellerManager=smgr;
+        
+    }
 
+    get=async (req,res)=>{
+        let result = await this.sellerManager.getAll();
+        res.send(result);
+        console.log(result);
+    }
 
-}
+    getById=async(req,res)=>{
+        let result = await this.sellerManager.getById(req.params.id);
+        res.send(result);
+        console.log(result);
+    }
 
+    post=async(req,res)=>{
+        let result = await this.sellerManager.insert(req);
+        res.send(result);
+        console.log(result);
+    }
 
+    put=async(req,res)=>{
+        let result = await this.sellerManager.update(req);
+        res.send(result);
+        console.log(result);
+    }
 
-exports.getById=async function(req,res){
-    let result=[];
-    result=await sellerdal.getByIdSeller(req.params.id);
-    res.send(result);
-
-}
-exports.removeById=async function(req,res){
-    let result=[];
-    result=await sellerdal.removeByIdSeller(req.params.id);
-    res.send(result);
-
+    delete=async(req,res)=>{
+        let result = await this.sellerManager.delete(req.params.id);
+        res.send(result);
+        console.log(result);
+    }
 }

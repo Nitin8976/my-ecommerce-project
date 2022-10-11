@@ -1,16 +1,18 @@
 import sql from './db.js'
+import Seller from '../models/sellermodel.js';
 
 
-
-export  default class CustomerManager{
+export  default class SellerManager{
     constructor(){
+        this.model = new Seller();
         
     }
+    
     
     insert=(req,res)=>{
         return new Promise(resolve=>{
     
-            var cmd = `call InsertCustomer('${req.body.email}','${req.body.password}','${req.body.firstname}','${req.body.lastname}','${req.body.address}',${req.body.contactnumber},'${req.body.role}','${req.body.location}')`
+            var cmd = `call InsertSeller('${req.body.email}','${req.body.password}','${req.body.firstname}','${req.body.lastname}','${req.body.address}',${req.body.contactnumber},'${req.body.role}','${req.body.gstin}')`
            
            
            console.log(cmd);
@@ -30,7 +32,7 @@ export  default class CustomerManager{
 
     update=(req,res)=>{
         return new Promise(resolve=>{
-            let command=`UPDATE users set email='${req.body.email}' WHERE password='${req.body.password}'`;
+            let command=`UPDATE users set email='${req.body.email}' WHERE password='${req.body.password} AND contactnumber='${req.body.contactnumber}'`;
             console.log(command);
             sql.query(command,(err, rows, fields)=>{
                 resolve(rows);
@@ -39,17 +41,8 @@ export  default class CustomerManager{
     }
 
     getAll(){
-    //     return new Promise(resolve=>{
-    //     fsModule.readFile(fileName,(err,data)=>{
-    //         var Data=data.toString();
-    //         var getAllCustomers = JSON.parse(Data);
-    //         resolve(getAllCustomers);
-           
-    //     })
-
-    // });
     return new Promise(resolve=>{
-        let command=    `SELECT * FROM users where role='customer'`;
+        let command=    `SELECT * FROM users where role='seller'`;
         console.log(command);
         sql.query(command,(err, rows, fields)=>{
             resolve(rows);

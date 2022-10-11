@@ -1,9 +1,9 @@
-import CustomerManager from "../models/customerdal.js";
+import CustomerManager from "../services/customerservice.js";
 import CustomerController from "../controllers/customercontroller.js";
 
 export default function(app){
-let mgr=new CustomerManager();// repo
-let customercontroller=new CustomerController(mgr); 
+let cmgr=new CustomerManager();// repo
+let customercontroller=new CustomerController(cmgr); 
 app.route('/api/customers')
 .get(customercontroller.get)
 .post(customercontroller.post)

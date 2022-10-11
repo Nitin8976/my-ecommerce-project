@@ -3,8 +3,8 @@
 
 export default class CustomerController{
     //constructor Dependency Injection
-    constructor(mgr){
-        this.customerManager=mgr;
+    constructor(cmgr){
+        this.customerManager=cmgr;
         
     }
 

@@ -1,8 +1,13 @@
 
-const sql=require('./db')
+import sql from  './db.js' 
+import CustomerAuth from '../models/customerauthmodel.js';
 
+export default class CustomerAuthManager{
+    constructor(){ 
+        this.model = new CustomerAuth();
+     }
 
-exports.loginSeller=function(req,res){
+loginUser=function(req,res){
     return new Promise(resolve=>{
         let username = req.body.email;
         let password = req.body.password;
@@ -16,7 +21,8 @@ exports.loginSeller=function(req,res){
                 if (err) throw err;
                 // If the account exists
                 if (rows.length > 0) {
-            
+                    // Redirect to home page
+    
                     resolve(rows);
                 
                 } else {
@@ -30,10 +36,13 @@ exports.loginSeller=function(req,res){
     
 }
 
-exports.logoutSeller= function (req, res) {
+
+logoutUser= function (req, res) {
 
    return new Promise(resolve=>{
      req.session.destroy();
     resolve('success', 'Login Again Here');
    })
   }
+
+}

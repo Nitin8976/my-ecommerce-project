@@ -1,10 +1,11 @@
 
 import sql from  './db.js' 
+import SellerAuth from '../models/sellerauthmodel.js';
 
-import jwt  from 'jsonwebtoken';
-
-export default class CustomerLoginManager{
-    constructor(){}
+export default class SellerAuthManager{
+    constructor(){ 
+        this.model = new SellerAuth();
+     }
 
 loginUser=function(req,res){
     return new Promise(resolve=>{
@@ -44,30 +45,4 @@ logoutUser= function (req, res) {
    })
   }
 
- updateBypassword=function(req,res){
-    return new Promise(resolve=>{
-        let email =req.body.email;
-        let password=req.body.password;
-        let newpassword=req.body.confirmpassword;
-        let jwtSecretKey="kuch_secret";
-            let authKey="Authorization";
-    let token =req.header(authKey);
-    let extractedData=jwt.verify(token,jwtSecretKey)
-    if(extractedData.client == req.session.isCustomerEmail){
-    let command=`UPDATE users SET password='${newpassword}' WHERE password ='${password}' AND email='${email}'`;
-    console.log(command);
-    sql.query(command,(err, rows, fields)=>{
-        if(err){
-            console.log(err);
-        }
-        else{
-        resolve(rows);
-        }
-    });
-}else{
-    console.log("try again");
-}
-    }
-    )
-}
 }

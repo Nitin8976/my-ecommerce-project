@@ -2,17 +2,17 @@
 import jwt  from 'jsonwebtoken';
 
 
-export default class CustomerLoginAuthController{
+export default class CustomerAuthController{
 
 constructor(cauthmgr){
-    this.customerLoginManager = cauthmgr;
+    this.customerAuthManager = cauthmgr;
 }
 
 login= async (req,res)=>{
     console.log(req.body)
     
     let result=[];
-    result=await this.customerLoginManager.loginUser(req);
+    result=await this.customerAuthManager.loginUser(req);
     console.log(result);
     
       req.session.isCustomer=result.map(result=>result.role)
@@ -42,18 +42,9 @@ else{
 }
 logout= async (req,res)=>{
     let result=[];
-    result=await this.customerLoginManager.logoutUser(req);
+    result=await this.customerAuthManager.logoutUser(req);
     console.log(result);
     res.send(result);
 //     res.redirect('/api/login');
 }
-
-updatepassword=async (req,res)=>{
-    let result=[];
-    result=await this.customerLoginManager.updateBypassword(req);
-    console.log(result);
-    res.send("password update successful")}
-
-
 }
-

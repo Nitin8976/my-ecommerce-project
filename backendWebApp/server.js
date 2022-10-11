@@ -1,13 +1,15 @@
 import express  from 'express';
-// import routeseller from './routes/routeSeller.js'
-import routecustomerloginauth from './routes/routecustomerloginauth.js';
-import routecustomer from './routes/routecustomer.js';
- import routeProduct from'./routes/routeProduct.js'
-// import routeorders from'./routes/routeorders.js'
-//  import routeadmindashboard from'./routes/routeadmindashboard.js'
-//  import routeCartitem from './routes/routeCartitem.js'
 import cors from 'cors' ;
  import session   from 'express-session' 
+import routecustomerauth from './routes/routecustomerauth.js';
+import routecustomer from './routes/routecustomer.js';
+ import routeProduct from'./routes/routeProduct.js'
+ import routeseller from './routes/routeSeller.js'
+ import routesellerAuth from './routes/routesellerAuth.js';
+// import routeorders from'./routes/routeorders.js'
+//  import routeadmindashboard from'./routes/routeadmindashboard.js'
+import routecartitem from './routes/routecartitem.js';
+
 
 
 
@@ -24,11 +26,12 @@ app.use(session({
     cookie: { maxAge: oneDay }
   }))
 
-// routeseller(app);
+ routeseller(app);
 routeProduct(app);
-routecustomerloginauth(app);
+routecustomerauth(app);
 routecustomer(app);
-//  routeCartitem(app);
+ routecartitem(app);
+ routesellerAuth(app);
 // routeorders(app)
 // routeadmindashboard(app)
 
