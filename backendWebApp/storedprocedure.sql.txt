@@ -1,0 +1,58 @@
+--fundstransfer
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FundsTransfer`(IN amount INT,IN customerid INT,IN sellerid INT)
+BEGIN
+START TRANSACTION;
+    SET @Amount=amount;
+    SET @FromAccount=customerid;
+    SET @ToAccount=sellerid;
+    UPDATE accounts SET balance=balance-@Amount WHERE accountid=@FromAccount;
+    UPDATE accounts SET balance=balance+@Amount WHERE accountid=@ToAccount;
+    
+		SELECT @fromaccid := accountid from accounts where accountid= @FromAccount;
+        SELECT @toaccid := accountid from accounts where accountid= @ToAccount;
+    
+    insert into transactions(fromaccid,toaccid,date)values(@fromaccid,toaccid,CURDATE());
+COMMIT;
+END
+
+----Insert into user seller
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertSeller`(
+IN email varchar(45),IN password varchar(45),IN firstname varchar(45),IN lastname varchar(45),IN address varchar(45), IN contactnumber INT,IN role varchar(45), IN gstin INT)
+BEGIN
+START TRANSACTION;
+SET @email=email;
+SET @password=password;
+SET @firstname=firstname;
+SET @lastname=lastname;
+SET  @address=address;
+SET @contactnumber=contactnumber;
+SET @role=role;
+SET @gstin = gstin;
+  
+  insert into users(email,password,firstname,lastname,address,contactnumber,role)values(@email,@password,@firstname,@lastname,@address,@contactnumber,@role);
+		SELECT @userid:= userid from users where email=@email AND role=@role ; 
+           insert into sellers(gstin,userid)values(@gstin,@userid);
+           end
+
+
+
+
+
+--Insert into user customer
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertCustomer`(
+IN email varchar(45),IN password varchar(45),IN firstname varchar(45),IN lastname varchar(45),IN address varchar(45), IN contactnumber INT,IN role varchar(45), IN location varchar(45))
+BEGIN
+START TRANSACTION;
+SET @email=email;
+SET @password=password;
+SET @firstname=firstname;
+SET @lastname=lastname;
+SET  @address=address;
+SET @contactnumber=contactnumber;
+SET @role=role;
+SET @location = location;
+  
+  insert into users(email,password,firstname,lastname,address,contactnumber,role)values(@email,@password,@firstname,@lastname,@address,@contactnumber,@role);
+		 SET @userid = LAST_INSERT_ID();
+           insert into customers(location,userid_fk)values(@location,@userid);
+           end
